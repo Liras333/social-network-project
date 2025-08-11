@@ -7,8 +7,8 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route element={<AppLayout />}>
-                    <Route index element={<Navigate replace to='social-network-project/home' />} />
-                    <Route path="social-network-project/home" element={<Home />} />
+                    <Route index element={<Navigate replace to='home' />} />
+                    <Route path="home" element={<Home />} />
                 </Route>
             </Routes>
         </BrowserRouter>
