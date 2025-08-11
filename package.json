@@ -2,11 +2,8 @@
   "name": "social-network-project",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://Liras333.github.io/social-network-project/",
   "type": "module",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
