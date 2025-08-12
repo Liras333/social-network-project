@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-
 import { GlobalStyles } from "./styles/GlobalStyles"
 import AppLayout from "./AppLayout"
 import Home from "./pages/Home"

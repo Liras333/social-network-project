@@ -30,7 +30,7 @@ body {
     font-size:18px;
     /* background-color: var(--color-creamy-1); */
     /* background-color: rgba(20, 35, 37, 1); */
-    background-color: rgba(235, 246, 248, 1);
+    background-color: rgba(236, 244, 246, 1);
 }
 
 ` 
