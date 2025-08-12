@@ -1,26 +1,29 @@
+import { BiSolidUser,BiSolidHeart, BiSolidGroup, BiSolidBookContent, BiSolidContact, BiSolidPlusCircle, BiSolidHome  } from "react-icons/bi";
+
+
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { ProfileImg } from "./ProfileImg";
+
 
 const StyledNavigation = styled.aside`
-    height:100dvh;
-        background-color: rgba(236, 244, 246, 1);
-
-    /* background-color:white; */
-
+    height:calc(100% - 60px);
+    background-color: rgba(236, 244, 246, 1);
     display:flex;
     flex-direction: column;
     gap:1rem;
     align-items: start;
     margin:1rem;
-
-    & div{
-        width:100%;
+    & div {
+        width:100%
     }
     & a {
         color: #19191a;
         font-weight: 400;
         letter-spacing: 2px;
-        display:inline-block;
+        display:inline-flex;
+        align-items:center;
+        gap:1rem;
         text-decoration: none;
         font-size:1.3rem;
         width:100%;
@@ -41,11 +44,63 @@ const StyledNavigation = styled.aside`
 function Navigation() {
     return (
         <StyledNavigation>
-            <NavLink to="users">User</NavLink>
-            <NavLink to="new-post">ADD NEW POST</NavLink>
-            <NavLink to="friends">Friends</NavLink>
-            <NavLink to="groups">Groups</NavLink>
-            <NavLink to="favorite">Favorite</NavLink>
+           
+            <NavLink to="user">
+                <span>
+                 <BiSolidUser />
+                </span>
+                <span>
+                    User
+                </span>
+            </NavLink>
+
+            <NavLink to="new-post">
+                <span>
+                    <BiSolidPlusCircle  />
+                </span>
+                <span>
+                    ADD NEW POST
+                </span>
+            </NavLink>
+            
+             <NavLink to="home">
+                <span>
+                 <BiSolidHome />
+                </span>
+                <span>
+                    Start
+                </span>
+            </NavLink>
+
+
+            <NavLink to="friends">
+                <span>
+                    <BiSolidContact  />
+                </span>
+                <span>
+                    Friends
+                </span>
+            </NavLink>
+
+            <NavLink to="groups">
+                <span>
+                    <BiSolidGroup />
+                </span>
+                <span>
+                    Groups
+                </span>
+            </NavLink>
+
+            <NavLink to="favorite">
+                <span>
+                    
+                    <BiSolidHeart />
+                </span>
+                <span>
+                    Favorite
+                </span>
+                </NavLink>
+            
         </StyledNavigation>
     )
 }

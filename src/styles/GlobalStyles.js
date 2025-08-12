@@ -5,7 +5,6 @@ export const GlobalStyles = createGlobalStyle`
 
 :root{
    
-    
     --color-0:#ffffff;
     --color-creamy-1:#f7ebe7;
     --color-creamy-2:#efd7cf;
@@ -23,6 +22,10 @@ export const GlobalStyles = createGlobalStyle`
     padding:0;
     margin:0;
     box-sizing: border-box;
+    
+    &:focus {
+     outline: 2px solid #396cf8;
+    }
 }
 
 body {

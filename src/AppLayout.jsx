@@ -5,9 +5,8 @@ import styled from "styled-components";
 
 const Container = styled.div`
     display:grid;
-    grid-template-columns: 14rem 1fr;
-    grid-template-rows: 60px 1fr;
-
+    grid-template-columns: 15rem 1fr;
+    grid-template-rows: 60px calc(100% - 60px);
 `
 
 
