@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import  SearchInput from "./SearchInput";
-import { ProfileImg } from "./ProfileImg";
+import SearchInput from "./SearchInput";
+import UserProfile from "./UserProfile";
 
 const StyledHeader = styled.header`
     width: 100%;
@@ -15,13 +15,6 @@ const StyledHeader = styled.header`
     grid-area: 1 / 1 / 1 / 3 ;
 `
 
-const UserBox = styled.div`
-    display:flex;
-    align-items: center;
-    gap:1rem;
-    padding: .3rem 1rem;
-`
-
 
 function Header() {
   return (
@@ -29,10 +22,7 @@ function Header() {
       <img src="logo.png" alt="Logo" />
       <SearchInput type="text" placeholder="Search" />
 
-      <UserBox >
-        <span>User</span>
-        <ProfileImg src="./default-profile-picture.png" />
-      </UserBox>
+      <UserProfile src="./default-profile-picture.png" alt="User Profile" position="left" />
     </StyledHeader>
   )
 }

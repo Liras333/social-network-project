@@ -1,9 +1,7 @@
-import { BiSolidUser,BiSolidHeart, BiSolidGroup, BiSolidBookContent, BiSolidContact, BiSolidPlusCircle, BiSolidHome  } from "react-icons/bi";
-
-
+import { BiSolidHeart, BiSolidGroup, BiSolidContact, BiSolidPlusCircle, BiSolidHome } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { ProfileImg } from "./ProfileImg";
+
 
 
 const StyledNavigation = styled.aside`
@@ -14,6 +12,7 @@ const StyledNavigation = styled.aside`
     gap:1rem;
     align-items: start;
     margin:1rem;
+
     & div {
         width:100%
     }
@@ -28,44 +27,41 @@ const StyledNavigation = styled.aside`
         font-size:1.3rem;
         width:100%;
         padding:1.5rem;
-        transition: all .05s ease;
+        transition: all .07s ease;
         border-radius: 1rem;
     }
 
     & a:hover {
+        color: #1c3ab1;
         background-color: rgb(147, 201, 214);
     }
 
     & a.active{
-        color: black
+        color: #1c3ab1;
+        background-color: rgb(147, 201, 214);
     }
+`
+
+const NewPost = styled(NavLink)`
+    background-color: rgb(190, 229, 239);
 `
 
 function Navigation() {
     return (
         <StyledNavigation>
-           
-            <NavLink to="user">
-                <span>
-                 <BiSolidUser />
-                </span>
-                <span>
-                    User
-                </span>
-            </NavLink>
 
-            <NavLink to="new-post">
+            <NewPost to="new-post">
                 <span>
-                    <BiSolidPlusCircle  />
+                    <BiSolidPlusCircle />
                 </span>
                 <span>
-                    ADD NEW POST
+                    NEW POST
                 </span>
-            </NavLink>
-            
-             <NavLink to="home">
+            </NewPost>
+
+            <NavLink to="home">
                 <span>
-                 <BiSolidHome />
+                    <BiSolidHome />
                 </span>
                 <span>
                     Start
@@ -75,7 +71,7 @@ function Navigation() {
 
             <NavLink to="friends">
                 <span>
-                    <BiSolidContact  />
+                    <BiSolidContact />
                 </span>
                 <span>
                     Friends
@@ -93,14 +89,14 @@ function Navigation() {
 
             <NavLink to="favorite">
                 <span>
-                    
+
                     <BiSolidHeart />
                 </span>
                 <span>
                     Favorite
                 </span>
-                </NavLink>
-            
+            </NavLink>
+
         </StyledNavigation>
     )
 }

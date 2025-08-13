@@ -22,7 +22,7 @@ export const GlobalStyles = createGlobalStyle`
     padding:0;
     margin:0;
     box-sizing: border-box;
-    
+
     &:focus {
      outline: 2px solid #396cf8;
     }

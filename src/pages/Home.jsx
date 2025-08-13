@@ -1,8 +1,10 @@
+import HomePosts from "../features/Home/HomePosts"
+
 function Home() {
     return (
-        <div>
-            Home
-        </div>
+        <>
+            <HomePosts />
+        </>
     )
 }
 

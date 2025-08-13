@@ -5,8 +5,13 @@ import styled from "styled-components";
 
 const Container = styled.div`
     display:grid;
-    grid-template-columns: 15rem 1fr;
-    grid-template-rows: 60px calc(100% - 60px);
+    grid-template-columns: 16rem 1fr;
+    grid-template-rows: 60px calc(100dvh - 60px);
+`
+const Main = styled.main`
+    overflow-y: auto;
+    padding: 1rem;
+
 `
 
 
@@ -15,7 +20,9 @@ function AppLayout() {
         <Container>
             <Header />
             <Navigation />
-            <Outlet />
+            <Main>
+                <Outlet />
+            </Main>
 
         </Container>
     )
