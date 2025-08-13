@@ -52,7 +52,7 @@ const FavoriteButton = styled(InitialButton)`
 function Post({ post }) {
     const [liked, setLiked] = useState(false)
     const [favorited, setFavorited] = useState(false)
-    const { id: idPost, title, content } = post;
+    const { id: idPost, title, content, likes } = post;
 
     function handleLikePost() {
         setLiked(liked => !liked)
@@ -66,6 +66,9 @@ function Post({ post }) {
                 {content}
             </p>
 
+            <p>
+                <span><BsSuitHeartFill style={{ color: 'red' }} /> {likes}</span>
+            </p>
             <hr />
             <LikeButton liked={liked} onClick={() => handleLikePost()}>
                 {!liked
