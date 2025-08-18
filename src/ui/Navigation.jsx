@@ -39,6 +39,7 @@ const StyledNavigation = styled.aside`
     & a.active{
         color: #1c3ab1;
         background-color: rgb(147, 201, 214);
+        outline: 2px solid #396cf8;
     }
 `
 
@@ -50,14 +51,14 @@ function Navigation() {
     return (
         <StyledNavigation>
 
-            <NewPost to="new-post">
+            {/* <NewPost to="new-post">
                 <span>
                     <BiSolidPlusCircle />
                 </span>
                 <span>
                     NEW POST
                 </span>
-            </NewPost>
+            </NewPost> */}
 
             <NavLink to="home">
                 <span>

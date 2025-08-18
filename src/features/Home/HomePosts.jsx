@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import Post from "../../ui/Post"
+import AddPost from "./AddPost"
 
 const StyledHomePosts = styled.div`
     width:47rem;
@@ -27,11 +28,19 @@ const posts = [
         content: "This is the content of post 3. It can be anything you want to share with your audience. Posts can vary in length and content, providing a platform for users to express their thoughts, ideas, or updates. It can include images, links, or any other media to enhance the message being conveyed.",
         likes: 30,
         comments: 15
+    },
+    {
+        id: 4,
+        title: "Post 4",
+        content: "This is the content of post 3. It can be anything you want to share with your audience. Posts can vary in length and content, providing a platform for users to express their thoughts, ideas, or updates. It can include images, links, or any other media to enhance the message being conveyed.",
+        likes: 30,
+        comments: 15
     }
 ]
 function HomePosts() {
     return (
         <StyledHomePosts>
+            <AddPost />
             {posts.map(post => (
                 <Post key={post.id} post={post} />
             ))}
