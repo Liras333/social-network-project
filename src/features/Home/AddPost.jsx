@@ -97,7 +97,7 @@ function AddPost() {
                 <br />
                 <Content name="content" onChange={(e) => setContent(e.target.value)} value={content} required placeholder="Write what you want to say other people."/>
                 <br />
-                <Button type="submit">Publish</Button>
+                <Button disabled={isAddingPost} type="submit">{isAddingPost ? 'Publishing' : 'Publish'}</Button>
             </Form>
 
 

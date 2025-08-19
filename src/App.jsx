@@ -4,7 +4,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { GlobalStyles } from "./styles/GlobalStyles"
 import AppLayout from "./AppLayout"
 import Home from "./pages/Home"
-import NewPost from "./pages/NewPost"
 import User from "./pages/User"
 import Friends from "./pages/Friends"
 import Groups from "./pages/Groups"
@@ -31,7 +30,6 @@ function App() {
                         <Route index element={<Navigate replace to='home' />} />
                         <Route path="home" element={<Home />} />
                         <Route path="user" element={<User />} />
-                        <Route path="new-post" element={<NewPost />} />
                         <Route path="friends" element={<Friends />} />
                         <Route path="groups" element={<Groups />} />
                         <Route path="favorite" element={<Favorite />} />

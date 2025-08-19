@@ -3,7 +3,8 @@ import { supabase } from "./supabase";
 export async function getPosts() {
     const { data, error } = await supabase
         .from('posts')
-        .select('*');
+        .select('*')
+        .order('created_at', { ascending: false });
 
     if (error) {
         throw new Error(`Error fetching posts: ${error.message}`);
