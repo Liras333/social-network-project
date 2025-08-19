@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components"
 import UserProfile from "../../ui/UserProfile"
 import { useState } from "react"
+import { useAddPost } from "./useAddPost";
+
 
 const StyledAddPost = styled.article`
     background-color: #b3d8ff;
@@ -66,11 +68,10 @@ const Button = styled.button`
 `
 
 
-
-
 function AddPost() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+    const { addPost, isAddingPost } = useAddPost()
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -80,6 +81,12 @@ function AddPost() {
         setTitle("");
         setContent("");
 
+        addPost({
+            postId: Math.floor(Math.random() * 100), // Simulating a post ID
+            title,
+            content,
+        })
+
     }
 
     return (
@@ -88,7 +95,7 @@ function AddPost() {
             <Form onSubmit={(e) => handleSubmit(e)}>
                 <TitleInput onChange={(e) => setTitle(e.target.value)} value={title} type="text" placeholder="Title" required />
                 <br />
-                <Content name="content" onChange={(e) => setContent(e.target.value)} value={content} required placeholder="Write what you want to say other people."></Content>
+                <Content name="content" onChange={(e) => setContent(e.target.value)} value={content} required placeholder="Write what you want to say other people."/>
                 <br />
                 <Button type="submit">Publish</Button>
             </Form>

@@ -1,0 +1,26 @@
+import { supabase } from "./supabase";
+
+export async function getPosts() {
+    const { data, error } = await supabase
+        .from('posts')
+        .select('*');
+
+    if (error) {
+        throw new Error(`Error fetching posts: ${error.message}`);
+    }
+
+    return data;
+}
+
+export async function addPost(post) {
+    const { data, error } = await supabase
+        .from('posts')
+        .insert([post])
+        .single();
+
+    if (error) {
+        throw new Error(`Error inserting post: ${error.message}`);
+    }
+
+    return data;
+}

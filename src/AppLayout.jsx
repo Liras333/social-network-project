@@ -11,7 +11,6 @@ const Container = styled.div`
 const Main = styled.main`
     overflow-y: auto;
     padding: 1rem;
-
 `
 
 

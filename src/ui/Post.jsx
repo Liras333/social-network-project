@@ -1,7 +1,7 @@
+import { useState } from "react";
 import styled from "styled-components"
 import UserProfile from "../ui/UserProfile"
 import { BsSuitHeart, BsSuitHeartFill, BsChat, BsPostageHeart, BsPostageHeartFill } from "react-icons/bs";
-import { useState } from "react";
 
 const StyledPost = styled.article`
     color: #222224;
@@ -18,7 +18,7 @@ const StyledPost = styled.article`
     }
 
 
-    h2 {
+    h3 {
         margin: .5rem 0;
     }
 
@@ -58,23 +58,25 @@ color: ${props => props.favorited && "#424b57"};
 
 
 function Post({ post }) {
+
     const [liked, setLiked] = useState(false)
     const [favorited, setFavorited] = useState(false)
-    const { id: idPost, title, content, likes, comments } = post;
+    const { postId, title, content, created_at } = post;
 
     function handleLikePost() {
         setLiked(liked => !liked)
+
+
     }
 
     return (
         <StyledPost >
             <UserDate>
                 <UserProfile src="./default-profile-picture.png" alt="User Profile" position="right" />
-                {new Date().toLocaleDateString("en-US", {})}
-
+                {new Date(created_at).toLocaleDateString("en-US", {})}
             </UserDate>
-            
-            <h2>{title}</h2>
+
+            <h3>{title}</h3>
             <p>
                 {content}
             </p>
@@ -88,11 +90,10 @@ function Post({ post }) {
                     :
                     <BsSuitHeartFill />
                 }
-                {liked ? likes + 1 : likes}
             </LikeButton>
 
             <InitialButton title="Comments">
-                <BsChat /> {comments}
+                <BsChat />
             </InitialButton>
 
             <FavoriteButton favorited={favorited} onClick={() => setFavorited(favorited => !favorited)}>

@@ -1,4 +1,6 @@
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { GlobalStyles } from "./styles/GlobalStyles"
 import AppLayout from "./AppLayout"
 import Home from "./pages/Home"
@@ -7,10 +9,22 @@ import User from "./pages/User"
 import Friends from "./pages/Friends"
 import Groups from "./pages/Groups"
 import Favorite from "./pages/Favorite"
+
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            staleTime: 1000 * 60 * 5, // 5 minutes
+        }
+    }
+})
+
+
 function App() {
     return (
-        <>
-            <GlobalStyles/>
+        <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={false} />
+            <GlobalStyles />
             <BrowserRouter>
                 <Routes>
                     <Route element={<AppLayout />}>
@@ -24,7 +38,7 @@ function App() {
                     </Route>
                 </Routes>
             </BrowserRouter>
-        </>
+        </QueryClientProvider>
     )
 }
 
