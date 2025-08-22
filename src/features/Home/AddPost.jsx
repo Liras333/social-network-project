@@ -1,8 +1,9 @@
 import styled, { css } from "styled-components"
-import UserProfile from "../../ui/UserProfile"
 import { useState } from "react"
 import { useAddPost } from "./useAddPost";
-
+import Spinner from "../../ui/Spinner";
+import Input from "../../ui/Input";
+import Button from "../../ui/Button";
 
 const StyledAddPost = styled.article`
     background-color: #b3d8ff;
@@ -16,19 +17,10 @@ const StyledAddPost = styled.article`
         margin: .5rem 0;
     }
 
-
     h2 {
         margin: .5rem 0;
     }
 
-`
-
-const TitleInput = styled.input`
-    padding: 1rem;
-    font-size: 1rem;
-    width: 100%;
-    border: none;
-    border-radius: 10px;
 `
 
 
@@ -51,20 +43,6 @@ const Form = styled.form`
     display: flex;
     gap: .5rem;
     flex-direction: column;
-`
-
-const Button = styled.button`
-    padding: 1rem;
-    background-color: #424b57;
-    color: white;
-    border: none;
-    font-size:1rem;
-    border-radius: 10px;
-    cursor: pointer;
-
-    &:hover{
-        filter:brightness(1.2)
-    }
 `
 
 
@@ -94,11 +72,11 @@ function AddPost() {
         <StyledAddPost>
             <h2>Add a new post</h2>
             <Form onSubmit={(e) => handleSubmit(e)}>
-                <TitleInput onChange={(e) => setTitle(e.target.value)} value={title} type="text" placeholder="Title" required />
+                <Input onChange={(e) => setTitle(e.target.value)} value={title} type="text" placeholder="Title" required />
                 <br />
                 <Content name="content" onChange={(e) => setContent(e.target.value)} value={content} required placeholder="Write what you want to say other people." />
                 <br />
-                <Button disabled={isAddingPost} type="submit">{isAddingPost ? 'Publishing' : 'Publish'}</Button>
+                <Button disabled={isAddingPost} type="submit">{isAddingPost ? <Spinner /> : 'Publish'}</Button>
             </Form>
 
 

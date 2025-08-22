@@ -8,7 +8,7 @@ import User from "./pages/User"
 import Friends from "./pages/Friends"
 import Groups from "./pages/Groups"
 import Favorite from "./pages/Favorite"
-
+import Login from "./pages/Login"
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -34,6 +34,8 @@ function App() {
                         <Route path="groups" element={<Groups />} />
                         <Route path="favorite" element={<Favorite />} />
                     </Route>
+                    <Route path="login" element={<Login />} />
+                    <Route path="*" element={<h1>Not found any page</h1>} />
                 </Routes>
             </BrowserRouter>
         </QueryClientProvider>

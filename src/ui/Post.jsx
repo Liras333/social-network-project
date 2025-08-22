@@ -23,6 +23,12 @@ const StyledPost = styled.article`
 
 `
 
+const ProfileAndDate = styled.div`
+    display: flex;  
+    align-items: center;
+    gap: .5rem;
+`
+
 const InitialButton = styled.button`
         display:inline-flex;
         align-items:center;
@@ -52,7 +58,7 @@ const FavoriteButton = styled(InitialButton)`
 function Post({ post }) {
     const [liked, setLiked] = useState(false)
     const [favorited, setFavorited] = useState(false)
-    const { id: idPost, title, content } = post;
+    const { title, content, created_at } = post;
 
     function handleLikePost() {
         setLiked(liked => !liked)
@@ -60,7 +66,10 @@ function Post({ post }) {
 
     return (
         <StyledPost >
-            <UserProfile src="default-profile-picture.png" alt="User Profile" position="right" />
+            <ProfileAndDate>
+                <UserProfile src="/default-profile-picture.png" alt="User Profile" position="right" />
+                <span>{new Date(created_at).toLocaleDateString("en-US")}</span>
+            </ProfileAndDate>
             <h3>{title}</h3>
             <p>
                 {content}

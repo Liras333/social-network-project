@@ -1,7 +1,7 @@
+import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 import Header from "./ui/Header";
 import Navigation from "./ui/Navigation"
-import styled from "styled-components";
 
 const Container = styled.div`
     display:grid;

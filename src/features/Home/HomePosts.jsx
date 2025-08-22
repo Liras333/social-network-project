@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { usePosts } from "./usePosts";
 import Post from "../../ui/Post"
 import AddPost from "./AddPost"
-import Spinner from "../../ui/Spinner";
+import SkeletonLoader from "../../ui/SkeletonLoader";
 
 const StyledHomePosts = styled.div`
     width:47rem;
@@ -10,18 +10,15 @@ const StyledHomePosts = styled.div`
 `
 
 function HomePosts() {
-    const { posts, isLoading, error } = usePosts();
+    const { posts, isLoading } = usePosts();
 
 
 
     if (isLoading) {
         return (
-            <>
-                <Spinner />
-                <Spinner />
-                <Spinner />
-                <Spinner />
-            </>
+            <StyledHomePosts>
+                <SkeletonLoader />
+            </StyledHomePosts>
         )
     }
 
