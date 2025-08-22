@@ -22,7 +22,7 @@ function Header() {
       <img src="logo.png" alt="Logo" />
       <SearchInput type="text" placeholder="Search" />
 
-      <UserProfile src="./default-profile-picture.png" alt="User Profile" position="left" />
+      <UserProfile src="default-profile-picture.png" alt="User Profile" position="left" />
     </StyledHeader>
   )
 }

@@ -41,18 +41,18 @@ const InitialButton = styled.button`
 `
 
 const LikeButton = styled(InitialButton)`
-    color: ${props => props.liked && "red"};
+    color: ${props => props.liked && "#c00d0d"};
 `
 
 const FavoriteButton = styled(InitialButton)`
-    color: ${props => props.favorited && "blue"};
+    color: ${props => props.favorited && "#5d616e"};
 `
 
 
 function Post({ post }) {
     const [liked, setLiked] = useState(false)
     const [favorited, setFavorited] = useState(false)
-    const { id: idPost, title, content, likes } = post;
+    const { id: idPost, title, content } = post;
 
     function handleLikePost() {
         setLiked(liked => !liked)
@@ -60,7 +60,7 @@ function Post({ post }) {
 
     return (
         <StyledPost >
-            <UserProfile src="./default-profile-picture.png" alt="User Profile" position="right" />
+            <UserProfile src="default-profile-picture.png" alt="User Profile" position="right" />
             <h3>{title}</h3>
             <p>
                 {content}
@@ -85,11 +85,11 @@ function Post({ post }) {
                     ?
                     <> <BsPostageHeart /> Add to favorite </>
                     :
-                    <> <BsPostageHeartFill />Added to favorite </>
+                    <> <BsPostageHeartFill />Favorited </>
                 }
             </FavoriteButton>
-            <hr />
 
+            
         </StyledPost>
     )
 }

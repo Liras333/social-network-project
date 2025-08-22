@@ -68,6 +68,7 @@ const Button = styled.button`
 `
 
 
+
 function AddPost() {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -82,20 +83,20 @@ function AddPost() {
         setContent("");
 
         addPost({
-            postId: Math.floor(Math.random() * 100), // Simulating a post ID
             title,
             content,
         })
-
     }
 
+
+    localStorage.setItem("title", "asd");
     return (
         <StyledAddPost>
             <h2>Add a new post</h2>
             <Form onSubmit={(e) => handleSubmit(e)}>
                 <TitleInput onChange={(e) => setTitle(e.target.value)} value={title} type="text" placeholder="Title" required />
                 <br />
-                <Content name="content" onChange={(e) => setContent(e.target.value)} value={content} required placeholder="Write what you want to say other people."/>
+                <Content name="content" onChange={(e) => setContent(e.target.value)} value={content} required placeholder="Write what you want to say other people." />
                 <br />
                 <Button disabled={isAddingPost} type="submit">{isAddingPost ? 'Publishing' : 'Publish'}</Button>
             </Form>

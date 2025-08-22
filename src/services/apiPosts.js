@@ -1,6 +1,6 @@
 import { supabase } from "./supabase";
 
-export async function getPosts() {
+export async function getPosts(id) {
     const { data, error } = await supabase
         .from('posts')
         .select('*')

@@ -5,12 +5,14 @@ import styled from "styled-components";
 
 const Container = styled.div`
     display:grid;
-    grid-template-columns: 16rem 1fr;
+    grid-template-columns: 0.2fr 1fr;
     grid-template-rows: 60px calc(100dvh - 60px);
 `
 const Main = styled.main`
     overflow-y: auto;
     padding: 1rem;
+    gap:1rem;
+    display: flex;
 `
 
 
@@ -22,7 +24,8 @@ function AppLayout() {
             <Main>
                 <Outlet />
             </Main>
-
+            
+            
         </Container>
     )
 }
