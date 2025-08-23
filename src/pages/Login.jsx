@@ -36,6 +36,9 @@ const LoginOptions = styled.div`
     font-weight: bold;
 
 `
+const Logo = styled.img`
+  width:200px;
+`
 
 const Option = styled.span`
     cursor: pointer;
@@ -63,7 +66,7 @@ function Login() {
     return (
         <StyledLogin>
             <Box>
-                <img src="logo.png" alt="Logo" />
+                <Logo src="/logo.ico" alt="Logo" />
                 <LoginOptions>
                     <Option active={isLogin} onClick={() => { setIsLogin(true) }}>Log in</Option>
                     <Option active={!isLogin} onClick={() => { setIsLogin(false) }}>Sign up</Option>

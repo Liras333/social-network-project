@@ -15,11 +15,14 @@ const StyledHeader = styled.header`
     grid-area: 1 / 1 / 1 / 3 ;
 `
 
+const Logo = styled.img`
+  width:70px;
+`
 
 function Header() {
   return (
     <StyledHeader>
-      <img src="logo.png" alt="Logo" />
+      <Logo src="/logo.ico" alt="Logo" />
       <SearchInput type="text" placeholder="Search" />
 
       <UserProfile src="/default-profile-picture.png" alt="User Profile" position="left" />

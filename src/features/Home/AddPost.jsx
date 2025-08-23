@@ -34,9 +34,11 @@ const Content = styled.textarea`
         height: 15rem;
     `}
 
+
     &:focus {
         height: 15rem;
     }
+
 `
 
 const Form = styled.form`
@@ -74,7 +76,9 @@ function AddPost() {
             <Form onSubmit={(e) => handleSubmit(e)}>
                 <Input onChange={(e) => setTitle(e.target.value)} value={title} type="text" placeholder="Title" required />
                 <br />
-                <Content name="content" onChange={(e) => setContent(e.target.value)} value={content} required placeholder="Write what you want to say other people." />
+                <Input type="text" placeholder="#hashtags" />
+                <br />
+                <Content onChange={(e) => setContent(e.target.value)} value={content} required placeholder="Write what you want to say other people." />
                 <br />
                 <Button disabled={isAddingPost} type="submit">{isAddingPost ? <Spinner /> : 'Publish'}</Button>
             </Form>

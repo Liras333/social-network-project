@@ -1,7 +1,8 @@
-import styled, { css } from "styled-components"
-import UserProfile from "../ui/UserProfile"
+import styled from "styled-components"
 import { BsSuitHeart, BsSuitHeartFill, BsChat, BsPostageHeart, BsPostageHeartFill } from "react-icons/bs";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import UserProfile from "../ui/UserProfile"
 
 const StyledPost = styled.article`
     background-color: #f9fcff;
@@ -56,9 +57,23 @@ const FavoriteButton = styled(InitialButton)`
 
 
 function Post({ post }) {
+    const [searchParams, setSearchParams] = useSearchParams()
     const [liked, setLiked] = useState(false)
     const [favorited, setFavorited] = useState(false)
-    const { title, content, created_at } = post;
+    const [isCommentClicked, setIsCommentClicked] = useState(false)
+    const {postId, title, content, created_at } = post;
+
+    function onClickComment(){
+        setIsCommentClicked(comment => !comment)
+        isCommentClicked 
+        ? setSearchParams((searchParams) =>{
+            searchParams.set("post", postId);
+            return searchParams;
+        }) 
+        : setSearchParams({})
+    }
+    
+
 
     function handleLikePost() {
         setLiked(liked => !liked)
@@ -85,7 +100,7 @@ function Post({ post }) {
                 }
             </LikeButton>
 
-            <InitialButton>
+            <InitialButton onClick={()=>onClickComment()}>
                 <BsChat />
             </InitialButton>
 
