@@ -51,15 +51,6 @@ function Navigation() {
     return (
         <StyledNavigation>
 
-            {/* <NewPost to="new-post">
-                <span>
-                    <BiSolidPlusCircle />
-                </span>
-                <span>
-                    NEW POST
-                </span>
-            </NewPost> */}
-
             <NavLink to="home">
                 <span>
                     <BiSolidHome />

@@ -57,28 +57,29 @@ const Option = styled.span`
     }
 `
 
-function Login(){
+function Login() {
     const [isLogin, setIsLogin] = useState(true);
 
-  return(
-    <StyledLogin>
-        <Box>
-            <img src="logo.png" alt="Logo" />
-            <LoginOptions>
-                <Option active={isLogin} onClick={() => {setIsLogin(true)}}>Log in</Option>
-                <Option active={!isLogin} onClick={() => {setIsLogin(false)}}>Sign up</Option>
-            </LoginOptions>
-            <hr />
-              {isLogin 
-                ? <LoginAuth />
-                : <RegisterAuth />
-              }
+    return (
+        <StyledLogin>
+            <Box>
+                <img src="logo.png" alt="Logo" />
+                <LoginOptions>
+                    <Option active={isLogin} onClick={() => { setIsLogin(true) }}>Log in</Option>
+                    <Option active={!isLogin} onClick={() => { setIsLogin(false) }}>Sign up</Option>
+                </LoginOptions>
+                <hr />
 
-           
-        </Box>
+                {isLogin
+                    ? <LoginAuth />
+                    : <RegisterAuth />
+                }
 
-    </StyledLogin>
-  )
+
+            </Box>
+
+        </StyledLogin>
+    )
 }
 
 export default Login;

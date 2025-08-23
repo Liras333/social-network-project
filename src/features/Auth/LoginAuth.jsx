@@ -1,34 +1,76 @@
 import { useState } from "react";
+import { useForm, } from "react-hook-form";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import styled from "styled-components";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 
 
-
 const ShowPassword = styled.span`
-    position: relative;
-    left: 200px;
-    bottom: 50px;
+    position: absolute;
+    right: 1rem;
+    bottom: 77px;
     cursor:pointer;
 `
-function LoginAuth(){
-    const [showPassword, setShowPassword] = useState(false);
 
-  return(
-    <>
-    <h3>Hello again!</h3>
-    <p>Let's throw to your new posts.</p>
-    <Input type="text" placeholder="Email" required />
-                <Input type={showPassword ? "text" : "password"} placeholder="Password" required />
-                <ShowPassword onClick={()=> setShowPassword(show => !show)}>
-                    {showPassword 
-                        ? <BsEye/>
-                        : <BsEyeSlash />
-                    }
-                </ShowPassword>
-    <Button type="submit">Login</Button>
-    </>
+const Form = styled.form`
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    width:100%;
+    position: relative;
+    text-align:center;
+`
+
+function LoginAuth() {
+  const [showPassword, setShowPassword] = useState(false);
+  const { register, handleSubmit, reset, getValues, formState } = useForm()
+
+  const { errors } = formState;
+
+  function onSubmit(data) {
+    console.log(data)
+    console.log(errors?.password?.message)
+    reset();
+
+  }
+
+  return (
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <h3>Hello again!</h3>
+      <p>Let's throw to your new posts.</p>
+
+      <Input
+        type="text"
+        placeholder="Email"
+        required
+        {...register("email", {
+          required: "This field is required"
+
+        })}
+
+      />
+
+      <Input
+        type={showPassword ? "text" : "password"}
+        placeholder="Password"
+        required
+        {...register("password", {
+          required: "This field is required",
+          minLength: 7
+        })
+
+        }
+      />
+
+      <ShowPassword onClick={() => setShowPassword(show => !show)}>
+        {showPassword
+          ? <BsEye />
+          : <BsEyeSlash />
+        }
+      </ShowPassword>
+      <Button type="submit">Login</Button>
+    </Form>
   )
 }
 
