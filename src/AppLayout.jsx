@@ -16,7 +16,7 @@ const Main = styled.main`
     padding: 1rem;
     gap:1rem;
     display: flex;
-
+    justify-content:center;
 `
 
 
@@ -31,10 +31,12 @@ function AppLayout() {
             <Navigation />
             <Main>
                 <Outlet />
-
+                
+                {postId &&
                 <SimpleBar autoHide={true}>
-                    {postId ? <Comments /> : ""}
+                    <Comments /> 
                 </SimpleBar>
+                }
             </Main>
 
             

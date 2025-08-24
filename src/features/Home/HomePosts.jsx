@@ -10,7 +10,7 @@ import SkeletonLoader from "../../ui/SkeletonLoader";
 const StyledHomePosts = styled.div`
     width:47rem;
     margin: 0 auto;
-
+    
 `
 
 function HomePosts() {
