@@ -11,6 +11,7 @@ const Container = styled.div`
     display:grid;
     grid-template-columns: 0.2fr 1fr;
     grid-template-rows: 60px calc(100dvh - 60px);
+    overflow:hidden;
 `
 const Main = styled.main`
     padding: 1rem;
@@ -25,12 +26,17 @@ function AppLayout() {
     const [searchParams, setSearchParams] = useSearchParams()
     const postId = searchParams.get("post")
 
+    
+
     return (
         <Container>
             <Header />
             <Navigation />
             <Main>
-                <Outlet />
+                <SimpleBar autoHide={true}>
+                    <Outlet />
+                </SimpleBar>
+                
                 
                 {postId &&
                 <SimpleBar autoHide={true}>

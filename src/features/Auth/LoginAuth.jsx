@@ -28,11 +28,9 @@ function LoginAuth() {
 
   const { errors } = formState;
 
-  function onSubmit(data) {
-    console.log(data)
-    console.log(errors?.password?.message)
+  // console.log(errors)
+  function onSubmit() {
     reset();
-
   }
 
   return (
@@ -48,7 +46,6 @@ function LoginAuth() {
           required: "This field is required"
 
         })}
-
       />
 
       <Input
@@ -57,11 +54,11 @@ function LoginAuth() {
         required
         {...register("password", {
           required: "This field is required",
-          minLength: 7
         })
 
         }
       />
+      {errors?.password?.message ? <span>{errors?.password?.message}</span> : ''}
 
       <ShowPassword onClick={() => setShowPassword(show => !show)}>
         {showPassword

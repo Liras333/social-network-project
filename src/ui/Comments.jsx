@@ -3,15 +3,16 @@ import styled from "styled-components"
 const CommentBox = styled.div`
     width:25rem;
     height:100dvh;
-    padding:1rem;
     background-color: #ffffff;
     border-radius:15px;
+    padding:1rem ;
 `
 
 function Comments() {
     return (
         <CommentBox>
-         b   
+            <h2 style={{ position: "sticky", top: '1rem', left: 0, }}>Comments</h2>
+
         </CommentBox>
     )
 }
