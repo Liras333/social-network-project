@@ -4,7 +4,7 @@ import { BsEye, BsEyeSlash } from "react-icons/bs";
 import styled from "styled-components";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
-
+import { useLogin } from "./useLogin";
 
 const ShowPassword = styled.span`
     position: absolute;
@@ -26,10 +26,13 @@ function LoginAuth() {
   const [showPassword, setShowPassword] = useState(false);
   const { register, handleSubmit, reset, getValues, formState } = useForm()
 
+  const { login, isPending } = useLogin()
+
   const { errors } = formState;
 
-  // console.log(errors)
-  function onSubmit() {
+  function onSubmit({ email, password }) {
+    login({ email, password })
+
     reset();
   }
 

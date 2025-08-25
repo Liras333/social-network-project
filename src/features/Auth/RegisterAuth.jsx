@@ -5,6 +5,8 @@ import styled from "styled-components";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
 import { useSignup } from "./useSignup";
+import Spinner from '../../ui/Spinner'
+import { useNavigate } from "react-router-dom";
 
 const ShowPassword = styled.span`
     position: absolute;
@@ -30,9 +32,10 @@ const Form = styled.form`
 function RegisterAuth() {
     const [showPassword, setShowPassword] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
-    const { register, reset, handleSubmit, formState: {errors}, getValues } = useForm();
+    const { register, reset, handleSubmit, formState: { errors }, getValues } = useForm();
 
     const { signup, isPending } = useSignup();
+
 
     function onSubmit({ nickname, email, password }) {
         signup({ nickname, email, password }, { onSettled: reset })
@@ -44,7 +47,7 @@ function RegisterAuth() {
             <h3>Are you new?</h3>
             <p>Create your new account and start making posts.</p>
             <Input type="text" placeholder="Nickname" required {...register('nickname')} />
-            <Input type="text" placeholder="Email" required {...register('email')} />
+            <Input type="email" placeholder="Email" required {...register('email')} />
             <Input type={showPassword ? "text" : "password"} placeholder="Password" required {...register('password')} />
             <ShowPassword onClick={() => setShowPassword(show => !show)}>
                 {showPassword
@@ -53,14 +56,14 @@ function RegisterAuth() {
                 }
             </ShowPassword>
 
-            <Input type={showPassword2 ? "text" : "password"} placeholder="Repeat Password" required {...register('password2', {validate: (value)=>value === getValues().password || "Passwords are not the same"})} />
+            <Input type={showPassword2 ? "text" : "password"} placeholder="Repeat Password" required {...register('password2', { validate: (value) => value === getValues().password || "Passwords are not the same" })} />
             <ShowPassword2 onClick={() => setShowPassword2(show => !show)}>
                 {showPassword2
                     ? <BsEye />
                     : <BsEyeSlash />
                 }
             </ShowPassword2>
-            <Button type="submit">Sign in</Button>
+            <Button type="submit">{isPending ? <Spinner /> : 'Sign in'}</Button>
         </Form>
     )
 }
