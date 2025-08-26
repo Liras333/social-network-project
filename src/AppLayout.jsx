@@ -26,28 +26,25 @@ function AppLayout() {
     const [searchParams, setSearchParams] = useSearchParams()
     const postId = searchParams.get("post")
 
-    
+
 
     return (
-        <Container>
-            <Header />
-            <Navigation />
-            <Main>
-                <SimpleBar autoHide={true}>
-                    <Outlet />
-                </SimpleBar>
-                
-                
-                {postId &&
-                <SimpleBar autoHide={true}>
-                    <Comments /> 
-                </SimpleBar>
-                }
-            </Main>
+            <Container>
+                <Header />
+                <Navigation />
+                <Main>
+                    <SimpleBar autoHide={true}>
+                        <Outlet />
+                    </SimpleBar>
 
-            
-            
-        </Container>
+
+                    {postId &&
+                        <SimpleBar autoHide={true}>
+                            <Comments />
+                        </SimpleBar>
+                    }
+                </Main>
+            </Container>
     )
 }
 

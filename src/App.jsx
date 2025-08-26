@@ -9,6 +9,8 @@ import Friends from "./pages/Friends"
 import Groups from "./pages/Groups"
 import Favorite from "./pages/Favorite"
 import Login from "./pages/Login"
+import ProtectedRoute from "./ui/ProtectedRoute";
+
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -26,7 +28,7 @@ function App() {
             <GlobalStyles />
             <BrowserRouter>
                 <Routes>
-                    <Route element={<AppLayout />}>
+                    <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
                         <Route index element={<Navigate replace to='home' />} />
                         <Route path="home" element={<Home />} />
                         <Route path="user" element={<User />} />
