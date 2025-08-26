@@ -4,6 +4,7 @@ import { useAddPost } from "./useAddPost";
 import Spinner from "../../ui/Spinner";
 import Input from "../../ui/Input";
 import Button from "../../ui/Button";
+import { useUser } from "../Auth/useUser";
 
 const StyledAddPost = styled.article`
     background-color: #b3d8ff;
@@ -54,6 +55,9 @@ function AddPost() {
     const [content, setContent] = useState("");
     const { addPost, isAddingPost } = useAddPost()
 
+    const {user} = useUser()
+
+
     function handleSubmit(e) {
         e.preventDefault();
         if (title.trim() === "" || content.trim() === "") {
@@ -65,6 +69,7 @@ function AddPost() {
         addPost({
             title,
             content,
+            userUid: user.sub
         })
     }
 

@@ -61,8 +61,8 @@ function Post({ post }) {
     const [liked, setLiked] = useState(false)
     const [favorited, setFavorited] = useState(false)
     const [isCommentClicked, setIsCommentClicked] = useState(false)
-    const {postId, title, content, created_at } = post;
-
+    const {postId, title, content, created_at, userUid } = post;
+    
     function onClickComment(){
         setIsCommentClicked(comment => !comment)
         isCommentClicked 
@@ -82,7 +82,7 @@ function Post({ post }) {
     return (
         <StyledPost >
             <ProfileAndDate>
-                <UserProfile src="/default-profile-picture.png" alt="User Profile" position="right" />
+                <UserProfile type="post" userUid={userUid} src="/default-profile-picture.png" alt="User Profile" position="right" />
                 <span>{new Date(created_at).toLocaleDateString("en-US")}</span>
             </ProfileAndDate>
             <h3>{title}</h3>

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function ProtectedRoute({ children }) {
     const navigate = useNavigate()
-    const { isLoading, user, isAuthenticated } = useUser();
+    const { isLoading, isAuthenticated } = useUser();
 
     useEffect(function() {
         if (!isAuthenticated && !isLoading) navigate("/login");
@@ -13,7 +13,9 @@ function ProtectedRoute({ children }) {
 
 
     if (isLoading) return (
-        <Spinner />
+        <span>
+            loading...
+        </span>
     )
 
 

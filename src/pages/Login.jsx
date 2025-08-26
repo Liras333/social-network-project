@@ -61,15 +61,15 @@ const Option = styled.span`
 `
 
 function Login() {
-    const [isLogin, setIsLogin] = useState(true);
+    const [isLogin, setIsLogin] = useState('true');
 
     return (
         <StyledLogin>
             <Box>
                 <Logo src="/logo.ico" alt="Logo" />
                 <LoginOptions>
-                    <Option active={isLogin} onClick={() => { setIsLogin(true) }}>Log in</Option>
-                    <Option active={!isLogin} onClick={() => { setIsLogin(false) }}>Sign up</Option>
+                    <Option active={isLogin ? isLogin : undefined} onClick={() => { setIsLogin(true) }}>Log in</Option>
+                    <Option active={!isLogin ? isLogin : undefined} onClick={() => { setIsLogin(false) }}>Sign up</Option>
                 </LoginOptions>
                 <hr />
 
