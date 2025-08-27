@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import SearchInput from "./SearchInput";
 import UserProfile from "./UserProfile";
+import { useLogout } from "../features/Auth/useLogout";
 
 const StyledHeader = styled.header`
     width: 100%;
@@ -20,11 +21,13 @@ const Logo = styled.img`
 `
 
 function Header() {
+  const { logout } = useLogout()
+
   return (
     <StyledHeader>
       <Logo src="/logo.ico" alt="Logo" />
       <SearchInput type="text" placeholder="Search" />
-
+      <span onClick={logout}>Logout</span>
       <UserProfile src="/default-profile-picture.png" alt="User Profile" position="left" />
     </StyledHeader>
   )

@@ -1,7 +1,9 @@
 import styled, { css } from "styled-components";
 import LoginAuth from "../features/Auth/LoginAuth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RegisterAuth from "../features/Auth/RegisterAuth";
+import { useUser } from "../features/Auth/useUser";
+import { useNavigate } from "react-router-dom";
 
 const StyledLogin = styled.div`
     display: flex;
@@ -46,7 +48,7 @@ const Option = styled.span`
     border-radius:5px;
     transition: background-color .2s, color .2s;
 
-    ${props => props.active && css`
+    ${props => props.$active && css`
             background-color: #424b57;
 
         color:white;
@@ -61,15 +63,22 @@ const Option = styled.span`
 `
 
 function Login() {
-    const [isLogin, setIsLogin] = useState('true');
+    const [isLogin, setIsLogin] = useState(true);
+
+    const navigate = useNavigate()
+    const { isAuthenticated, isLoading } = useUser();
+
+    useEffect(() => {
+        if (isAuthenticated && !isLoading) return navigate('/home')
+    }, [isAuthenticated, isLoading, navigate])
 
     return (
         <StyledLogin>
             <Box>
                 <Logo src="/logo.ico" alt="Logo" />
                 <LoginOptions>
-                    <Option active={isLogin ? isLogin : undefined} onClick={() => { setIsLogin(true) }}>Log in</Option>
-                    <Option active={!isLogin ? isLogin : undefined} onClick={() => { setIsLogin(false) }}>Sign up</Option>
+                    <Option $active={isLogin} onClick={() => { setIsLogin(true) }}>Log in</Option>
+                    <Option $active={!isLogin} onClick={() => { setIsLogin(false) }}>Sign up</Option>
                 </LoginOptions>
                 <hr />
 

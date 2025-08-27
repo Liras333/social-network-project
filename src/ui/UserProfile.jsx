@@ -7,6 +7,7 @@ const UserBox = styled.div`
     display:flex;
     align-items: center;
     gap:.7rem;
+    cursor: pointer;
 `
 
 export const StyledUserProfile = styled.img`
