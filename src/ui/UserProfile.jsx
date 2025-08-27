@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useUser } from "../features/Auth/useUser";
-import { useUserEqualId } from "../features/Auth/useUserEqualId";
+import { useUserUid } from "../features/Auth/useUserUid";
 
 
 const UserBox = styled.div`
@@ -13,19 +13,13 @@ export const StyledUserProfile = styled.img`
     width:2.5rem;
 `
 
-export default function UserProfile({userUid, src, alt, position = "left", type }) {
-    const {user} = useUser();
-    const {userEqualId} = useUserEqualId()
+export default function UserProfile({ postUserUid, src, alt, position = "left", type }) {
+    const { user } = useUser();
+    const { userUid } = useUserUid()
 
-    console.log(user.nickname, userEqualId)
+    const postUser = userUid?.find((el) => el?.userUid === postUserUid)
+    const nickname = postUser?.nickname ? postUser?.nickname : type !== "post" ? user.nickname : 'anon'
 
-    const jakisUser = userEqualId?.find((el) => el?.userUid === userUid && el.nickname) 
-    // const nazwaJakiegosUsera = jakisUser ? 
-
-    // const nickname = jakisUser ? userEqualId?.find((el) => el?.nickname)  : 'anon'
-
-    // const username = user.sub === userUid || type !== "post" ? user.nickname : "an"
-    // console.log( userEqualId?.find((el) => el?.userUid === user?.nickname))
     return (
         <UserBox>
             {position === "left" && <span><b>{nickname}</b></span>}
