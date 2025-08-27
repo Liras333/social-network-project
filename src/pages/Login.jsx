@@ -64,12 +64,12 @@ const Option = styled.span`
 
 function Login() {
     const [isLogin, setIsLogin] = useState(true);
-
-    const navigate = useNavigate()
     const { isAuthenticated, isLoading } = useUser();
 
-    useEffect(() => {
-        if (isAuthenticated && !isLoading) return navigate('/home')
+    const navigate = useNavigate()
+    
+    useEffect(()=> {
+        if(isAuthenticated && !isLoading) navigate('/home');
     }, [isAuthenticated, isLoading, navigate])
 
     return (
@@ -84,7 +84,7 @@ function Login() {
 
                 {isLogin
                     ? <LoginAuth />
-                    : <RegisterAuth />
+                    : <RegisterAuth handleSetIsLogin={setIsLogin} />
                 }
 
 

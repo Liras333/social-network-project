@@ -19,7 +19,7 @@ export default function UserProfile({ postUserUid, src, alt, position = "left", 
     const { userUid } = useUserUid()
 
     const postUser = userUid?.find((el) => el?.userUid === postUserUid)
-    const nickname = postUser?.nickname ? postUser?.nickname : type !== "post" ? user.nickname : 'anon'
+    const nickname = postUser?.nickname ? postUser?.nickname : type !== "post" ? user?.nickname : 'anon'
 
     return (
         <UserBox>

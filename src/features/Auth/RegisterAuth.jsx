@@ -29,7 +29,7 @@ const Form = styled.form`
 `
 
 
-function RegisterAuth() {
+function RegisterAuth({handleSetIsLogin}) {
     const [showPassword, setShowPassword] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
     const { register, reset, handleSubmit, formState: { errors }, getValues } = useForm();
@@ -39,6 +39,7 @@ function RegisterAuth() {
 
     function onSubmit({ nickname, email, password }) {
         signup({ nickname, email, password }, { onSettled: reset })
+        handleSetIsLogin(true)
     }
 
 
