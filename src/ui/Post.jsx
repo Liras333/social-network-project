@@ -61,8 +61,11 @@ function Post({ post }) {
     const [liked, setLiked] = useState(false)
     const [favorited, setFavorited] = useState(false)
     const [isCommentClicked, setIsCommentClicked] = useState(false)
+
     const {postId, title, content, created_at, userUid } = post;
     
+
+
     function onClickComment(){
         setIsCommentClicked(comment => !comment)
         isCommentClicked 

@@ -3,6 +3,7 @@ import { usePosts } from "./usePosts";
 import Post from "../../ui/Post"
 import AddPost from "./AddPost"
 import SkeletonLoader from "../../ui/SkeletonLoader";
+import { useLikes } from "./useLikes";
 
 
 
@@ -15,7 +16,7 @@ const StyledHomePosts = styled.div`
 
 function HomePosts() {
     const { posts, isLoading } = usePosts();
-
+    const {likes} = useLikes()
 
 
     if (isLoading) {

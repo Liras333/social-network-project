@@ -1,6 +1,6 @@
 import { supabase } from "./supabase";
 
-export async function getPosts(id) {
+export async function getPosts() {
     const { data, error } = await supabase
         .from('posts')
         .select('*')
@@ -24,4 +24,25 @@ export async function addPost(post) {
     }
 
     return data;
+}
+
+export async function addLike({postId, userUid}) {
+   const { data, error } = await supabase
+    .from('LikedPosts')
+    .insert([
+        {postId, userUid},
+    ])
+    .select()
+
+    if(error) throw new Error(error.message)
+
+    return data
+}
+
+export async function Likes(){
+    const {data, error} = await supabase.from("LikedPosts").select('*')
+
+    if(error) throw new Error(error.message)
+    return data
+
 }
