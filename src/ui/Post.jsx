@@ -3,6 +3,10 @@ import { BsSuitHeart, BsSuitHeartFill, BsChat, BsPostageHeart, BsPostageHeartFil
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import UserProfile from "../ui/UserProfile"
+import { useUser } from "../features/Auth/useUser";
+import { useAddLike } from "../features/Home/useAddLike";
+import { useUnlike } from "../features/Home/useUnlike";
+// import { useLikes } from "../features/Home/useLikes";
 
 const StyledPost = styled.article`
     background-color: #f9fcff;
@@ -56,15 +60,20 @@ const FavoriteButton = styled(InitialButton)`
 `
 
 
-function Post({ post }) {
+function Post({ post,likes }) {
     const [searchParams, setSearchParams] = useSearchParams()
-    const [liked, setLiked] = useState(false)
     const [favorited, setFavorited] = useState(false)
     const [isCommentClicked, setIsCommentClicked] = useState(false)
 
     const {postId, title, content, created_at, userUid } = post;
-    
+    const  {addLike, isPending}= useAddLike()
+    const {unlike} = useUnlike()
+    const {user} = useUser()
 
+    const postLikes = likes?.find(like => like?.postId === postId) ?  likes?.filter(like => like?.postId === postId) : ''
+    const likesCount = postLikes.length
+
+    const isUserLikedPost = likes?.find(like => like?.postId === postId && like?.userUid === user?.sub) 
 
     function onClickComment(){
         setIsCommentClicked(comment => !comment)
@@ -79,7 +88,12 @@ function Post({ post }) {
 
 
     function handleLikePost() {
-        setLiked(liked => !liked)
+        if(!isUserLikedPost) {
+            addLike({postId, userUid: user?.sub})
+        }
+        else {
+            unlike({postId, userUid: user?.sub})
+        }
     }
 
     return (
@@ -94,13 +108,14 @@ function Post({ post }) {
             </p>
 
             <hr />
-            <LikeButton liked={liked} onClick={() => handleLikePost()}>
-                {!liked
+            <LikeButton onClick={handleLikePost}>
+                {!isUserLikedPost
                     ?
                     <BsSuitHeart /> 
                     :
                     <BsSuitHeartFill />
                 }
+                {likesCount}
             </LikeButton>
 
             <InitialButton onClick={()=>onClickComment()}>

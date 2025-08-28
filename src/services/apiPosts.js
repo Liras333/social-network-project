@@ -22,13 +22,24 @@ export async function addPost(post) {
     if (error) {
         throw new Error(`Error inserting post: ${error.message}`);
     }
-
+    
     return data;
+}
+
+export async function getLikes(){
+    const {data, error} = await supabase
+        .from("likedPosts")
+        .select('*')
+
+    if(error) throw new Error(error.message)
+
+    return data
+
 }
 
 export async function addLike({postId, userUid}) {
    const { data, error } = await supabase
-    .from('LikedPosts')
+    .from('likedPosts')
     .insert([
         {postId, userUid},
     ])
@@ -39,10 +50,13 @@ export async function addLike({postId, userUid}) {
     return data
 }
 
-export async function Likes(){
-    const {data, error} = await supabase.from("LikedPosts").select('*')
+export async function unlike({postId, userUid}){
+    const { error } = await supabase
+        .from('likedPosts')
+        .delete()
+        .eq('postId', postId)
+        .eq('userUid', userUid)
+        .select();
 
     if(error) throw new Error(error.message)
-    return data
-
 }

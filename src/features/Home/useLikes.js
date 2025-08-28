@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { Likes as likesApi } from "../../services/apiPosts";
+import { getLikes } from "../../services/apiPosts";
 
 export function useLikes(){
     const {data: likes, isLoading} = useQuery({
         queryKey: ['likedPosts'],
-        queryFn: likesApi
+        queryFn: getLikes
     })
 
     return {likes, isLoading}

@@ -1,9 +1,9 @@
 import styled from "styled-components"
 import { usePosts } from "./usePosts";
+import { useLikes } from "./useLikes";
+import SkeletonLoader from "../../ui/SkeletonLoader";
 import Post from "../../ui/Post"
 import AddPost from "./AddPost"
-import SkeletonLoader from "../../ui/SkeletonLoader";
-import { useLikes } from "./useLikes";
 
 
 
@@ -32,7 +32,7 @@ function HomePosts() {
                 
                 <AddPost />
                 {posts.map(post => (
-                    <Post key={post.postId} post={post} />
+                    <Post key={post.postId} post={post} likes={likes} />
                 ))}
 
         </StyledHomePosts>
