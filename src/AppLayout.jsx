@@ -40,7 +40,7 @@ function AppLayout() {
 
                     {postId &&
                         <SimpleBar autoHide={true}>
-                            <Comments />
+                            <Comments postId={postId}/>
                         </SimpleBar>
                     }
                 </Main>

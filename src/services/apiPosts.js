@@ -22,35 +22,49 @@ export async function addPost(post) {
     if (error) {
         throw new Error(`Error inserting post: ${error.message}`);
     }
-    
+
     return data;
 }
 
-export async function getLikes(){
-    const {data, error} = await supabase
+export async function getOnePost({postId}) {
+    const { data, error } = await supabase
+        .from('posts')
+        .select('*')
+        .eq('postId', postId)
+
+    if (error) {
+        throw new Error(`Error inserting post: ${error.message}`);
+    }
+
+    return data;
+}
+
+
+export async function getLikes() {
+    const { data, error } = await supabase
         .from("likedPosts")
         .select('*')
 
-    if(error) throw new Error(error.message)
+    if (error) throw new Error(error.message)
 
     return data
 
 }
 
-export async function addLike({postId, userUid}) {
-   const { data, error } = await supabase
-    .from('likedPosts')
-    .insert([
-        {postId, userUid},
-    ])
-    .select()
+export async function addLike({ postId, userUid }) {
+    const { data, error } = await supabase
+        .from('likedPosts')
+        .insert([
+            { postId, userUid },
+        ])
+        .select()
 
-    if(error) throw new Error(error.message)
+    if (error) throw new Error(error.message)
 
     return data
 }
 
-export async function unlike({postId, userUid}){
+export async function unlike({ postId, userUid }) {
     const { error } = await supabase
         .from('likedPosts')
         .delete()
@@ -58,5 +72,5 @@ export async function unlike({postId, userUid}){
         .eq('userUid', userUid)
         .select();
 
-    if(error) throw new Error(error.message)
+    if (error) throw new Error(error.message)
 }

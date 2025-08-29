@@ -52,7 +52,14 @@ const InitialButton = styled.button`
 `
 
 const LikeButton = styled(InitialButton)`
-    color: ${props => props.liked && "#c00d0d"};
+    color: ${props => props.$liked ? "#c00d0d" : "#222"};
+    transition: 0.5s all ease;
+
+    & > svg {
+        color: ${props => props.$liked ? "#c00d0d" : "#222"};
+        transition: color 0.2s;
+    }
+    
 `
 
 const FavoriteButton = styled(InitialButton)`
@@ -60,39 +67,42 @@ const FavoriteButton = styled(InitialButton)`
 `
 
 
-function Post({ post,likes }) {
+function Post({ post, likes }) {
     const [searchParams, setSearchParams] = useSearchParams()
     const [favorited, setFavorited] = useState(false)
     const [isCommentClicked, setIsCommentClicked] = useState(false)
 
-    const {postId, title, content, created_at, userUid } = post;
-    const  {addLike, isPending}= useAddLike()
-    const {unlike} = useUnlike()
-    const {user} = useUser()
+    const { postId, title, content, created_at, userUid } = post;
+    const { addLike, isPending } = useAddLike()
+    const { unlike } = useUnlike()
+    const { user } = useUser()
 
-    const postLikes = likes?.find(like => like?.postId === postId) ?  likes?.filter(like => like?.postId === postId) : ''
+    const postLikes = likes?.find(like => like?.postId === postId) ? likes?.filter(like => like?.postId === postId) : ''
     const likesCount = postLikes.length
 
-    const isUserLikedPost = likes?.find(like => like?.postId === postId && like?.userUid === user?.sub) 
+    const isUserLikedPost = likes?.find(like => like?.postId === postId && like?.userUid === user?.sub)
 
-    function onClickComment(){
+    function onClickComment() {
         setIsCommentClicked(comment => !comment)
-        isCommentClicked 
-        ? setSearchParams((searchParams) =>{
-            searchParams.set("post", postId);
-            return searchParams;
-        }) 
-        : setSearchParams({})
+
+        if (isCommentClicked) {
+            setSearchParams((searchParams) => {
+                searchParams.set("post", postId);
+                return searchParams;
+            })
+        } else {
+            setSearchParams({})
+        }
     }
-    
+
 
 
     function handleLikePost() {
-        if(!isUserLikedPost) {
-            addLike({postId, userUid: user?.sub})
+        if (!isUserLikedPost) {
+            addLike({ postId, userUid: user?.sub })
         }
         else {
-            unlike({postId, userUid: user?.sub})
+            unlike({ postId, userUid: user?.sub })
         }
     }
 
@@ -108,17 +118,17 @@ function Post({ post,likes }) {
             </p>
 
             <hr />
-            <LikeButton onClick={handleLikePost}>
+            <LikeButton onClick={handleLikePost} $liked={isUserLikedPost}>
                 {!isUserLikedPost
                     ?
-                    <BsSuitHeart /> 
+                    <BsSuitHeart />
                     :
                     <BsSuitHeartFill />
                 }
                 {likesCount}
             </LikeButton>
 
-            <InitialButton onClick={()=>onClickComment()}>
+            <InitialButton onClick={onClickComment}>
                 <BsChat />
             </InitialButton>
 
@@ -131,7 +141,7 @@ function Post({ post,likes }) {
                 }
             </FavoriteButton>
 
-            
+
         </StyledPost>
     )
 }
