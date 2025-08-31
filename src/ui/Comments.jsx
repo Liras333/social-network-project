@@ -3,6 +3,7 @@ import { useOnePost } from "../features/Home/useOnePost"
 import Post from "./Post"
 import Spinner from "./Spinner"
 import { useLikes } from "../features/Home/useLikes"
+import AddComment from "../features/Home/addComment"
 
 const CommentBox = styled.div`
     width:25rem;
@@ -23,6 +24,7 @@ function Comments({ postId }) {
     return (
         <CommentBox>
             <Post post={post?.[0]} likes={likes} />
+            <AddComment />
         </CommentBox>
     )
 }
