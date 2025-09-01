@@ -17,13 +17,13 @@ const CommentBox = styled.div`
 function Comments({ postId }) {
     const { post, isLoading: isLoadingPost } = useOnePost(postId)
     const {likes} = useLikes()
-    console.log(post?.[0])
+    // console.log(post)
 
     if(isLoadingPost) return <Spinner type="small"/>
 
     return (
         <CommentBox>
-            <Post post={post?.[0]} likes={likes} />
+            <Post post={post} likes={likes} />
             <AddComment />
         </CommentBox>
     )

@@ -1,7 +1,9 @@
 import styled, { css } from "styled-components"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Spinner from "../../ui/Spinner";
 import Button from "../../ui/Button";
+import { useSearchParams } from "react-router-dom";
+import { useUser } from "../Auth/useUser";
 
 const StyledAddPost = styled.article`
     background-color: #dfdfdf;
@@ -27,9 +29,16 @@ const Content = styled.textarea`
     border: none;
     border-radius: 10px;
     resize:none;
+
     ${props => props.value !== "" && css`
-        height: 3.5rem;
+        height: 10rem;
     `}
+
+     ${props => props.value == "" && css`
+        height:3.5rem;
+    `}
+    
+
 
 
     &:focus {
@@ -48,24 +57,32 @@ const Form = styled.form`
 
 function AddComment() {
     const [content, setContent] = useState("");
-
-
-
+    const [searchParams] = useSearchParams();
+    
+    const {user} = useUser()
+    
     function handleSubmit(e) {
         e.preventDefault();
-        // if (title.trim() === "" || content.trim() === "") {
-        //     return;
-        // }
-        setContent("");
+        
+        if (content.trim() === "") {
+            return;
+        }
+        
+        const postId = searchParams.get('post')
+        const newComment =  {
+            userUId: user.sub,
+            postId,
+            content
+        }
 
+        setContent("");
     }
 
 
-    localStorage.setItem("title", "asd");
     return (
         <StyledAddPost>
             <Form onSubmit={(e) => handleSubmit(e)}>
-                <Content  required placeholder="Add Comment" />
+                <Content value={content} onChange={(e) => setContent(e.target.value)}  required placeholder="Add Comment" />
                 <br />
                 {/* <Button  type="submit">{isAddingPost ? <Spinner type="tiny" /> : 'Publish'}</Button> */}
                 <Button >Publish</Button> 

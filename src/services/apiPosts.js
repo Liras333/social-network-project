@@ -31,6 +31,7 @@ export async function getOnePost({postId}) {
         .from('posts')
         .select('*')
         .eq('postId', postId)
+        .single()
 
     if (error) {
         throw new Error(`Error inserting post: ${error.message}`);
