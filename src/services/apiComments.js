@@ -1,18 +1,24 @@
 import { supabase } from "./supabase";
 
-export async function getComments(postId) {
+export async function getComments( {postId} ) {
+    const { data, error } = await supabase.
+        from('commentPosts')
+        .select("*")
+        .eq('postId', postId)
 
+    if (error) throw new Error(error.message)
+
+    return data
 }
 
-export async function insertComment({newComment}){
-    const {data, error} = await supabase
+export async function addComment( newComment ) {
+    const { data, error } = await supabase
         .from("commentPosts")
-        .insert([
-            {newComment}
-        ])
-        .select()
+        .insert([newComment])
+        .single();
+        
 
-    if(error) throw new Error(error.message)
+    if (error) throw new Error(error.message)
 
     return data
 }

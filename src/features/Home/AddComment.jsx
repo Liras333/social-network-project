@@ -4,6 +4,7 @@ import Spinner from "../../ui/Spinner";
 import Button from "../../ui/Button";
 import { useSearchParams } from "react-router-dom";
 import { useUser } from "../Auth/useUser";
+import { useAddComment } from "./useAddComment";
 
 const StyledAddPost = styled.article`
     background-color: #dfdfdf;
@@ -58,22 +59,24 @@ const Form = styled.form`
 function AddComment() {
     const [content, setContent] = useState("");
     const [searchParams] = useSearchParams();
-    
-    const {user} = useUser()
-    
+
+    const { user } = useUser()
+    const { addComment } = useAddComment()
+
     function handleSubmit(e) {
         e.preventDefault();
-        
+
         if (content.trim() === "") {
             return;
         }
-        
+
         const postId = searchParams.get('post')
-        const newComment =  {
-            userUId: user.sub,
+        const newComment = {
+            userUid: user.sub,
             postId,
             content
         }
+        addComment(newComment)
 
         setContent("");
     }
@@ -82,10 +85,10 @@ function AddComment() {
     return (
         <StyledAddPost>
             <Form onSubmit={(e) => handleSubmit(e)}>
-                <Content value={content} onChange={(e) => setContent(e.target.value)}  required placeholder="Add Comment" />
+                <Content value={content} onChange={(e) => setContent(e.target.value)} required placeholder="Add Comment" />
                 <br />
                 {/* <Button  type="submit">{isAddingPost ? <Spinner type="tiny" /> : 'Publish'}</Button> */}
-                <Button >Publish</Button> 
+                <Button >Publish</Button>
             </Form>
 
 

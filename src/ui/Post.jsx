@@ -109,7 +109,7 @@ function Post({ post, likes }) {
     return (
         <StyledPost >
             <ProfileAndDate>
-                <UserProfile type="post" postUserUid={userUid} src="/default-profile-picture.png" alt="User Profile" position="right" />
+                <UserProfile type="post" postUserUid={userUid}  alt="User Profile" position="right" />
                 <span>{new Date(created_at).toLocaleDateString("pl-PL")}</span>
             </ProfileAndDate>
             <h3>{title}</h3>

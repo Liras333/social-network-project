@@ -14,7 +14,7 @@ export const StyledUserProfile = styled.img`
     width:2.5rem;
 `
 
-export default function UserProfile({ postUserUid, src, alt, position = "left", type }) {
+export default function UserProfile({ postUserUid, alt, position = "left", type }) {
     const { user } = useUser();
     const { userUid } = useUserUid()
 
@@ -24,7 +24,7 @@ export default function UserProfile({ postUserUid, src, alt, position = "left", 
     return (
         <UserBox>
             {position === "left" && <span><b>{nickname}</b></span>}
-            <StyledUserProfile src={src} alt={alt} />
+            <StyledUserProfile src="/default-profile-picture.png" alt={alt} />
             {position === "right" && <span><b>{nickname}</b></span>}
         </UserBox>
     )

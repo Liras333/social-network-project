@@ -17,7 +17,7 @@ export const GlobalStyles = createGlobalStyle`
 
 body {
     font-size:18px;
-    background-color: rgba(236, 244, 246, 1);
+    background-color: rgb(236, 244, 246);
 }
 
 ` 
