@@ -20,10 +20,10 @@ const StyledComment = styled.div`
 
 `
 
-function Comment({ comment }) {
+function Comment({ comment, postUserUid }) {
     return (
         <StyledComment>
-            <UserProfile position="right" />
+            <UserProfile position="right" postUserUid={postUserUid} />
             <p>{comment.content}</p>
         </StyledComment>
     )

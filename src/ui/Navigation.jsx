@@ -43,10 +43,6 @@ const StyledNavigation = styled.aside`
     }
 `
 
-const NewPost = styled(NavLink)`
-    background-color: rgb(190, 229, 239);
-`
-
 function Navigation() {
     return (
         <StyledNavigation>

@@ -61,7 +61,7 @@ function AddComment() {
     const [searchParams] = useSearchParams();
 
     const { user } = useUser()
-    const { addComment } = useAddComment()
+    const { addComment, isPending } = useAddComment()
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -87,8 +87,8 @@ function AddComment() {
             <Form onSubmit={(e) => handleSubmit(e)}>
                 <Content value={content} onChange={(e) => setContent(e.target.value)} required placeholder="Add Comment" />
                 <br />
-                {/* <Button  type="submit">{isAddingPost ? <Spinner type="tiny" /> : 'Publish'}</Button> */}
-                <Button >Publish</Button>
+                <Button  type="submit">{isPending ? <Spinner type="tiny" /> : 'Publish'}</Button>
+                {/* <Button >Publish</Button> */}
             </Form>
 
 

@@ -53,17 +53,16 @@ const InitialButton = styled.button`
 
 const LikeButton = styled(InitialButton)`
     color: ${props => props.$liked ? "#c00d0d" : "#222"};
-    transition: 0.5s all ease;
+    transition: 0.5s color ease;
 
-    & > svg {
-        color: ${props => props.$liked ? "#c00d0d" : "#222"};
-        transition: color 0.2s;
+    & path{
+        color: ${props => props.$liked? "#c00d0d" : "#222"};
     }
     
 `
 
 const FavoriteButton = styled(InitialButton)`
-    color: ${props => props.favorited && "#5d616e"};
+    color: ${props => props.$favorited && "#5d616e"};
 `
 
 
@@ -73,7 +72,7 @@ function Post({ post, likes }) {
     const [isCommentClicked, setIsCommentClicked] = useState(false)
 
     const { postId, title, content, created_at, userUid } = post;
-    const { addLike, isPending } = useAddLike()
+    const { addLike } = useAddLike()
     const { unlike } = useUnlike()
     const { user } = useUser()
 
@@ -85,6 +84,7 @@ function Post({ post, likes }) {
     function onClickComment() {
         setIsCommentClicked(comment => !comment)
 
+        
         if (isCommentClicked) {
             setSearchParams((searchParams) => {
                 searchParams.set("post", postId);
@@ -132,7 +132,7 @@ function Post({ post, likes }) {
                 <BsChat />
             </InitialButton>
 
-            <FavoriteButton favorited={favorited} onClick={() => setFavorited(favorited => !favorited)}>
+            <FavoriteButton $favorited={favorited} onClick={() => setFavorited(favorited => !favorited)}>
                 {!favorited
                     ?
                     <> <BsPostageHeart /> Add to favorite </>

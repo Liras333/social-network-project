@@ -17,10 +17,8 @@ export const StyledUserProfile = styled.img`
 export default function UserProfile({ postUserUid, alt, position = "left", type }) {
     const { user } = useUser();
     const { userUid } = useUserUid()
-
     const postUser = userUid?.find((el) => el?.userUid === postUserUid)
     const nickname = postUser?.nickname ? postUser?.nickname : type !== "post" ? user?.nickname : 'anon'
-
     return (
         <UserBox>
             {position === "left" && <span><b>{nickname}</b></span>}
