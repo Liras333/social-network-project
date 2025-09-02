@@ -21,7 +21,7 @@ const CommentBox = styled.div`
     height:100dvh;
     background-color: #ffffff;
     border-radius:15px;
-    padding:1rem;
+    padding:0 1rem ;
     display: flex;
     flex-direction: column;
     gap: 1rem;

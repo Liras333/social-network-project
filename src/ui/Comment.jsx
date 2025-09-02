@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import UserProfile from "./UserProfile"
+import { useUser } from "../features/Auth/useUser"
 
 const StyledComment = styled.div`
     background-color: rgb(236, 244, 246);
@@ -21,10 +22,15 @@ const StyledComment = styled.div`
 `
 
 function Comment({ comment, postUserUid }) {
+    const {user} = useUser();
     return (
         <StyledComment>
+            {
+                user.sub === comment.userUid && <span>X</span>
+            }
             <UserProfile position="right" postUserUid={postUserUid} />
             <p>{comment.content}</p>
+
         </StyledComment>
     )
 }

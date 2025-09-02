@@ -6,7 +6,7 @@ import UserProfile from "../ui/UserProfile"
 import { useUser } from "../features/Auth/useUser";
 import { useAddLike } from "../features/Home/useAddLike";
 import { useUnlike } from "../features/Home/useUnlike";
-// import { useLikes } from "../features/Home/useLikes";
+import { useComments } from "../features/Home/useComments";
 
 const StyledPost = styled.article`
     background-color: #f9fcff;
@@ -56,7 +56,7 @@ const LikeButton = styled(InitialButton)`
     transition: 0.5s color ease;
 
     & path{
-        color: ${props => props.$liked? "#c00d0d" : "#222"};
+        color: ${props => props.$liked ? "#c00d0d" : "#222"};
     }
     
 `
@@ -75,24 +75,32 @@ function Post({ post, likes }) {
     const { addLike } = useAddLike()
     const { unlike } = useUnlike()
     const { user } = useUser()
+    const { comments } = useComments(postId)
 
     const postLikes = likes?.find(like => like?.postId === postId) ? likes?.filter(like => like?.postId === postId) : ''
+    const postComments = comments?.find(comment => comment?.postId === postId) ? comments?.filter(comment => comment?.postId === postId) : ''
+    
+    
     const likesCount = postLikes.length
+    const commentsPost = postComments.length
 
     const isUserLikedPost = likes?.find(like => like?.postId === postId && like?.userUid === user?.sub)
 
     function onClickComment() {
-        setIsCommentClicked(comment => !comment)
+        setIsCommentClicked(prev => {
+            const newState = !prev;
 
-        
-        if (isCommentClicked) {
-            setSearchParams((searchParams) => {
-                searchParams.set("post", postId);
-                return searchParams;
-            })
-        } else {
-            setSearchParams({})
-        }
+            if (newState) {
+                setSearchParams((searchParams) => {
+                    searchParams.set("post", postId);
+                    return searchParams;
+                })
+            } else {
+                setSearchParams({})
+            }
+
+            return newState
+        })
     }
 
 
@@ -109,7 +117,7 @@ function Post({ post, likes }) {
     return (
         <StyledPost >
             <ProfileAndDate>
-                <UserProfile type="post" postUserUid={userUid}  alt="User Profile" position="right" />
+                <UserProfile type="post" postUserUid={userUid} alt="User Profile" position="right" />
                 <span>{new Date(created_at).toLocaleDateString("pl-PL")}</span>
             </ProfileAndDate>
             <h3>{title}</h3>
@@ -130,6 +138,7 @@ function Post({ post, likes }) {
 
             <InitialButton onClick={onClickComment}>
                 <BsChat />
+                {commentsPost}
             </InitialButton>
 
             <FavoriteButton $favorited={favorited} onClick={() => setFavorited(favorited => !favorited)}>
