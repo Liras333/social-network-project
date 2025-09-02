@@ -22,3 +22,14 @@ export async function addComment( newComment ) {
 
     return data
 }
+
+export async function deleteComment1( commentId ) {
+    const {  error } = await supabase
+        .from("commentPosts")
+        .delete()
+        .eq('commentId', commentId)
+        
+
+    if (error) throw new Error(error.message)
+
+}

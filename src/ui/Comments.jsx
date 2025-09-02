@@ -42,7 +42,10 @@ function Comments({ postId }) {
         <CommentBox>
             <Post post={post} likes={likes} />
             <AddComment />
-            {comments?.map((comment) => <Comment postUserUid={comment.userUid} key={comment.commentId} comment={comment} />)}
+            {comments?.length > 0 
+            ? comments?.map((comment) => <Comment postUserUid={comment.userUid} key={comment.commentId} comment={comment} />)
+            : <span>Add first Comment!</span>
+            }
         </CommentBox>
     )
 }

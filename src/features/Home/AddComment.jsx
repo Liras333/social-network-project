@@ -88,7 +88,6 @@ function AddComment() {
                 <Content value={content} onChange={(e) => setContent(e.target.value)} required placeholder="Add Comment" />
                 <br />
                 <Button  type="submit">{isPending ? <Spinner type="tiny" /> : 'Publish'}</Button>
-                {/* <Button >Publish</Button> */}
             </Form>
 
 
