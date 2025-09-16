@@ -1,10 +1,9 @@
 import { supabase } from "./supabase";
 
-export async function getComments( {postId} ) {
+export async function getComments() {
     const { data, error } = await supabase.
         from('commentPosts')
         .select("*")
-        .eq('postId', postId)
 
     if (error) throw new Error(error.message)
 

@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { getComments as getCommentsApi } from "../../services/apiComments";
 
-export function useComments (postId ) {
+export function useComments() {
 
     const { data: comments, isLoading } = useQuery({
-        queryKey: ["comments", postId],
-        queryFn: () => getCommentsApi({ postId} ),
+        queryKey: ["comments"],
+        queryFn: () => getCommentsApi(),
     });
 
     return { comments, isLoading };

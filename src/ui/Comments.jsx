@@ -1,11 +1,10 @@
 import styled, { keyframes } from "styled-components"
 import { useOnePost } from "../features/Home/useOnePost"
 import Post from "./Post"
-import Spinner from "./Spinner"
-import { useLikes } from "../features/Home/useLikes"
 import AddComment from "../features/Home/addComment"
-import { useComments } from "../features/Home/useComments"
 import Comment from "./Comment"
+import { useUser } from "../features/Auth/useUser"
+import { useAppContext } from "../hooks/AppContext"
 
 const slideComment = keyframes`
     from{
@@ -18,23 +17,27 @@ const slideComment = keyframes`
 
 const CommentBox = styled.div`
     width:25rem;
-    height:100dvh;
     background-color: #ffffff;
     border-radius:15px;
-    padding:0 1rem ;
+    padding:.5rem 1rem ;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     animation: ${slideComment} .15s linear;
-
 `
 
+function Comments({ postId, comments }) {
+    const { likes } = useAppContext();
 
-
-function Comments({ postId }) {
     const { post, isLoading: isLoadingPost } = useOnePost(postId)
-    const { likes } = useLikes()
-    const { comments, isLoading } = useComments(postId);
+
+    const { user } = useUser()
+
+
+    const commentsPost = comments
+        ?.filter(comment => comment?.postId === parseInt(postId))
+        ?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        || [];
 
     if (isLoadingPost) return null
 
@@ -42,9 +45,9 @@ function Comments({ postId }) {
         <CommentBox>
             <Post post={post} likes={likes} />
             <AddComment />
-            {comments?.length > 0 
-            ? comments?.map((comment) => <Comment postUserUid={comment.userUid} key={comment.commentId} comment={comment} />)
-            : <span>Add first Comment!</span>
+            {commentsPost?.length > 0
+                ? commentsPost?.map((comment) => <Comment user={user} postUserUid={comment.userUid} key={comment.commentId} comment={comment} />)
+                : <span>Add first Comment!</span>
             }
         </CommentBox>
     )

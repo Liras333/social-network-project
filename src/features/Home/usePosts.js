@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getPosts } from "../../services/apiPosts";
 
-export function usePosts() {
+export function usePosts(postId) {
     const { data: posts, isLoading } = useQuery({
         queryKey: ["posts"],
-        queryFn: getPosts,
+        queryFn: (postId) => getPosts(postId),
     });
 
 

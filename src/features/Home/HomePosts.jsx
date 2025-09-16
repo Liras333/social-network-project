@@ -1,22 +1,22 @@
 import styled from "styled-components"
 import { usePosts } from "./usePosts";
-import { useLikes } from "./useLikes";
+import { useUser } from "../Auth/useUser"
 import SkeletonLoader from "../../ui/SkeletonLoader";
 import Post from "../../ui/Post"
 import AddPost from "./AddPost"
-
-
-
+import { useComments } from "./useComments";
+import { useAppContext } from "../../hooks/AppContext";
 
 const StyledHomePosts = styled.div`
     width:47rem;
     margin: 0 auto;
-    
 `
 
 function HomePosts() {
+    const { likes, user } = useAppContext();
     const { posts, isLoading } = usePosts();
-    const {likes} = useLikes()
+    const { comments } = useComments();
+
 
 
     if (isLoading) {
@@ -29,11 +29,11 @@ function HomePosts() {
 
     return (
         <StyledHomePosts>
-                
-                <AddPost />
-                {posts.map(post => (
-                    <Post key={post.postId} post={post} likes={likes} />
-                ))}
+
+            <AddPost />
+            {posts.map(post => (
+                <Post key={post.postId} post={post} likes={likes} user={user} comments={comments} />
+            ))}
 
         </StyledHomePosts>
     )

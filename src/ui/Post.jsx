@@ -66,7 +66,7 @@ const FavoriteButton = styled(InitialButton)`
 `
 
 
-function Post({ post, likes }) {
+function Post({ post, likes, comments, user }) {
     const [searchParams, setSearchParams] = useSearchParams()
     const [favorited, setFavorited] = useState(false)
     const [isCommentClicked, setIsCommentClicked] = useState(false)
@@ -74,13 +74,10 @@ function Post({ post, likes }) {
     const { postId, title, content, created_at, userUid } = post;
     const { addLike } = useAddLike()
     const { unlike } = useUnlike()
-    const { user } = useUser()
-    const { comments } = useComments(postId)
 
     const postLikes = likes?.find(like => like?.postId === postId) ? likes?.filter(like => like?.postId === postId) : ''
     const postComments = comments?.find(comment => comment?.postId === postId) ? comments?.filter(comment => comment?.postId === postId) : ''
-    
-    
+
     const likesCount = postLikes.length
     const commentsPost = postComments.length
 

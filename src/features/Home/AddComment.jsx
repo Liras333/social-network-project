@@ -54,8 +54,6 @@ const Form = styled.form`
     flex-direction: column;
 `
 
-
-
 function AddComment() {
     const [content, setContent] = useState("");
     const [searchParams] = useSearchParams();

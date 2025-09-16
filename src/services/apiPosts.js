@@ -26,7 +26,7 @@ export async function addPost(post) {
     return data;
 }
 
-export async function getOnePost({postId}) {
+export async function getOnePost({ postId }) {
     const { data, error } = await supabase
         .from('posts')
         .select('*')
@@ -71,7 +71,6 @@ export async function unlike({ postId, userUid }) {
         .delete()
         .eq('postId', postId)
         .eq('userUid', userUid)
-        .select();
 
     if (error) throw new Error(error.message)
 }

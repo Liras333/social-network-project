@@ -6,6 +6,10 @@ import Comments from "./ui/Comments";
 
 import SimpleBar from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
+import { useComments } from "./features/Home/useComments";
+import { useLikes } from "./features/Home/useLikes";
+import { AppContext } from "./hooks/AppContext";
+import { useUser } from "./features/Auth/useUser";
 
 const Container = styled.div`
     display:grid;
@@ -20,31 +24,34 @@ const Main = styled.main`
     justify-content:center;
 `
 
-
 function AppLayout() {
+    
+    const { comments } = useComments();
+    const { likes } = useLikes();
+    const { user } = useUser();
 
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
     const postId = searchParams.get("post")
 
 
-
     return (
+        <AppContext.Provider value={{ likes,user }}>
             <Container>
                 <Header />
                 <Navigation />
                 <Main>
                     <SimpleBar autoHide={true}>
-                        <Outlet />
+                        <Outlet likes={likes} />
                     </SimpleBar>
-
 
                     {postId &&
                         <SimpleBar autoHide={true}>
-                            <Comments postId={postId}/>
+                            <Comments postId={postId} comments={comments} />
                         </SimpleBar>
                     }
                 </Main>
             </Container>
+        </AppContext.Provider>
     )
 }
 
