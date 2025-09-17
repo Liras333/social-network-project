@@ -10,6 +10,7 @@ import { useComments } from "./features/Home/useComments";
 import { useLikes } from "./features/Home/useLikes";
 import { AppContext } from "./hooks/AppContext";
 import { useUser } from "./features/Auth/useUser";
+import { usePosts } from "./features/Home/usePosts";
 
 const Container = styled.div`
     display:grid;
@@ -25,23 +26,25 @@ const Main = styled.main`
 `
 
 function AppLayout() {
-    
+
     const { comments } = useComments();
     const { likes } = useLikes();
     const { user } = useUser();
+    const { posts, isLoading: isLoadingPosts } = usePosts();
 
-    const [searchParams] = useSearchParams()
-    const postId = searchParams.get("post")
+    const [searchParams] = useSearchParams();
+    const postId = searchParams.get("post");
+    const post = posts?.find(post => post.postId === parseInt(postId)) || null;
 
 
     return (
-        <AppContext.Provider value={{ likes,user }}>
+        <AppContext.Provider value={{ likes, user, post, comments, posts, isLoadingPosts }}>
             <Container>
                 <Header />
                 <Navigation />
                 <Main>
                     <SimpleBar autoHide={true}>
-                        <Outlet likes={likes} />
+                        <Outlet />
                     </SimpleBar>
 
                     {postId &&

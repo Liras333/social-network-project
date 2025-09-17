@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import UserProfile from "./UserProfile"
-import { useUser } from "../features/Auth/useUser"
 import { BiX } from "react-icons/bi"
 import { useAppContext } from "../hooks/AppContext"
+import { useDeleteComment } from "../features/Home/useDeleteComment"
 
 const StyledComment = styled.div`
     background-color: rgb(236, 244, 246);
@@ -31,16 +31,24 @@ const UserAndClose = styled.div`
 
 function Comment({ comment, postUserUid }) {
     const { user } = useAppContext()
+    const { deleteComment, isDeletingComment } = useDeleteComment()
 
     function onDeleteComment() {
-
+        deleteComment(comment.commentId)
     }
 
     return (
         <StyledComment>
             <UserAndClose>
                 <UserProfile position="right" postUserUid={postUserUid} />
-                {user.sub === comment.userUid && <span onClick={onDeleteComment}><BiX /></span>}
+                {
+                    user.sub === comment.userUid
+                    && <span style={{ cursor: 'pointer' }} onClick={onDeleteComment}>
+                        {isDeletingComment
+                            ? <span>wait...</span>
+                            : < BiX />
+                        }
+                    </span>}
 
             </UserAndClose>
             <p>{comment.content}</p>

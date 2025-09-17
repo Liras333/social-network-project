@@ -26,20 +26,6 @@ export async function addPost(post) {
     return data;
 }
 
-export async function getOnePost({ postId }) {
-    const { data, error } = await supabase
-        .from('posts')
-        .select('*')
-        .eq('postId', postId)
-        .single()
-
-    if (error) {
-        throw new Error(`Error inserting post: ${error.message}`);
-    }
-
-    return data;
-}
-
 
 export async function getLikes() {
     const { data, error } = await supabase

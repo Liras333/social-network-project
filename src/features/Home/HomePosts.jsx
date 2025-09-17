@@ -13,13 +13,10 @@ const StyledHomePosts = styled.div`
 `
 
 function HomePosts() {
-    const { likes, user } = useAppContext();
-    const { posts, isLoading } = usePosts();
-    const { comments } = useComments();
+    const { likes, user, comments, posts, isLoadingPosts } = useAppContext();
 
 
-
-    if (isLoading) {
+    if (isLoadingPosts) {
         return (
             <StyledHomePosts>
                 <SkeletonLoader />

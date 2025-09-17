@@ -6,6 +6,8 @@ export function useComments() {
     const { data: comments, isLoading } = useQuery({
         queryKey: ["comments"],
         queryFn: () => getCommentsApi(),
+        staleTime: 60000 * 5,
+
     });
 
     return { comments, isLoading };

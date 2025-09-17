@@ -1,9 +1,7 @@
 import styled, { keyframes } from "styled-components"
-import { useOnePost } from "../features/Home/useOnePost"
 import Post from "./Post"
 import AddComment from "../features/Home/addComment"
 import Comment from "./Comment"
-import { useUser } from "../features/Auth/useUser"
 import { useAppContext } from "../hooks/AppContext"
 
 const slideComment = keyframes`
@@ -27,11 +25,7 @@ const CommentBox = styled.div`
 `
 
 function Comments({ postId, comments }) {
-    const { likes } = useAppContext();
-
-    const { post, isLoading: isLoadingPost } = useOnePost(postId)
-
-    const { user } = useUser()
+    const { likes, user, post } = useAppContext();
 
 
     const commentsPost = comments
@@ -39,11 +33,10 @@ function Comments({ postId, comments }) {
         ?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
         || [];
 
-    if (isLoadingPost) return null
 
     return (
         <CommentBox>
-            <Post post={post} likes={likes} />
+            <Post post={post} likes={likes} comments={comments} />
             <AddComment />
             {commentsPost?.length > 0
                 ? commentsPost?.map((comment) => <Comment user={user} postUserUid={comment.userUid} key={comment.commentId} comment={comment} />)
