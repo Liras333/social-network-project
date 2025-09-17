@@ -34,11 +34,11 @@ function AppLayout() {
 
     const [searchParams] = useSearchParams();
     const postId = searchParams.get("post");
-    const post = posts?.find(post => post.postId === parseInt(postId)) || null;
+    const post = posts?.find(post => post.postId === parseInt(postId));
 
 
     return (
-        <AppContext.Provider value={{ likes, user, post, comments, posts, isLoadingPosts }}>
+        <AppContext.Provider value={{ likes, user, post: post || null, comments, posts, isLoadingPosts }}>
             <Container>
                 <Header />
                 <Navigation />

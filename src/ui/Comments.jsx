@@ -3,6 +3,7 @@ import Post from "./Post"
 import AddComment from "../features/Home/addComment"
 import Comment from "./Comment"
 import { useAppContext } from "../hooks/AppContext"
+import Spinner from "./Spinner"
 
 const slideComment = keyframes`
     from{
@@ -24,8 +25,8 @@ const CommentBox = styled.div`
     animation: ${slideComment} .15s linear;
 `
 
-function Comments({ postId, comments }) {
-    const { likes, user, post } = useAppContext();
+function Comments({ postId }) {
+    const { likes, user, post, comments } = useAppContext();
 
 
     const commentsPost = comments
@@ -33,6 +34,11 @@ function Comments({ postId, comments }) {
         ?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
         || [];
 
+    if(!post) return (
+        <CommentBox>
+            <span><Spinner/></span>
+        </CommentBox>
+    )
 
     return (
         <CommentBox>
