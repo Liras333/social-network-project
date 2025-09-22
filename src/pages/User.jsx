@@ -1,8 +1,10 @@
+import UserPage from "../features/User/UserPage";
+
 function User(){
   return(
-    <div>
-    
-    </div>
+    <>
+      <UserPage />
+    </>
   )
 }
 

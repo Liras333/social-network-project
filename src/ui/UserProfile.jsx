@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useUser } from "../features/Auth/useUser";
 import { useUserUid } from "../features/Auth/useUserUid";
+import { useNavigate } from "react-router-dom";
 
 
 const UserBox = styled.div`
@@ -15,12 +16,22 @@ export const StyledUserProfile = styled.img`
 `
 
 export default function UserProfile({ postUserUid, alt, position = "left", type }) {
+    
+    const navigate = useNavigate();
+
     const { user } = useUser();
     const { userUid } = useUserUid()
     const postUser = userUid?.find((el) => el?.userUid === postUserUid)
     const nickname = postUser?.nickname ? postUser?.nickname : type !== "post" ? user?.nickname : 'anon'
+
+
+
+    function handleClick() {
+        navigate(`/user/`);
+    }
+
     return (
-        <UserBox>
+        <UserBox onClick={handleClick}>
             {position === "left" && <span><b>{nickname}</b></span>}
             <StyledUserProfile src="/default-profile-picture.png" alt={alt} />
             {position === "right" && <span><b>{nickname}</b></span>}
