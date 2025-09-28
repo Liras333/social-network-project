@@ -26,17 +26,17 @@ const CommentBox = styled.div`
 `
 
 function Comments({ postId }) {
-    const { likes, user, post, comments } = useAppContext();
-
+    const { likes, user, comments, posts } = useAppContext();
+    const post = posts?.find(post => post?.postId === parseInt(postId));
 
     const commentsPost = comments
         ?.filter(comment => comment?.postId === parseInt(postId))
         ?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
         || [];
 
-    if(!post) return (
+    if (!post) return (
         <CommentBox>
-            <span><Spinner/></span>
+            <span><Spinner /></span>
         </CommentBox>
     )
 

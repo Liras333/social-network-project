@@ -72,7 +72,7 @@ function Post({ post, likes, comments, user }) {
     const [isCommentClicked, setIsCommentClicked] = useState(false)
 
     const { postId, title, content, created_at, userUid } = post;
-    const { addLike } = useAddLike()
+    const { addLike, isLiking } = useAddLike()
     const { unlike } = useUnlike()
 
     const postLikes = likes?.find(like => like?.postId === postId) ? likes?.filter(like => like?.postId === postId) : ''
@@ -81,7 +81,7 @@ function Post({ post, likes, comments, user }) {
     const likesCount = postLikes.length
     const commentsPost = postComments.length
 
-    const isUserLikedPost = likes?.find(like => like?.postId === postId && like?.userUid === user?.sub)
+    const isUserLikedPost = likes?.some(like => like?.postId === postId && like?.userUid === user?.sub) 
 
     function onClickComment() {
         setIsCommentClicked(prev => {
@@ -124,7 +124,7 @@ function Post({ post, likes, comments, user }) {
 
             <hr />
             <LikeButton onClick={handleLikePost} $liked={isUserLikedPost}>
-                {!isUserLikedPost
+                {(!isUserLikedPost || isLiking)
                     ?
                     <BsSuitHeart />
                     :

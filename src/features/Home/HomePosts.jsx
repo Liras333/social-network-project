@@ -10,7 +10,7 @@ function HomePosts() {
 
     if (isLoadingPosts) {
         return (
-                <SkeletonLoader />
+            <SkeletonLoader />
         )
     }
 
